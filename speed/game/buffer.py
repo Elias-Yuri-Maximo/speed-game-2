@@ -24,7 +24,7 @@ class Buffer(Actor):
         '''
         pass
 
-    def add_character(self):
+    def add_character(self, character):
         '''
         This function will add a character from what the player has typed.
         '''
