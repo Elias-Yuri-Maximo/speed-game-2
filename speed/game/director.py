@@ -88,6 +88,9 @@ class Director:
         #an argument fot the output_service to print
 
         letter = self._input_service.get_letter()
+        if letter == '*':
+            self._buffer.reset()
+
         self._buffer.add_character(letter)
         
 

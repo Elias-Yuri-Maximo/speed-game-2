@@ -40,6 +40,7 @@ class Buffer(Actor):
         passes the chacter list to a string and saves it to _TEXT attribute
         '''
         string = ''
+        
         for letter in self._buffer_letter_list:
             string += letter
 
