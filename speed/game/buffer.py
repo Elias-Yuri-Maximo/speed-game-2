@@ -14,11 +14,15 @@ class Buffer(Actor):
     def __init__(self):
         
         super().__init__() 
-        self._buffer_letter_list = []  
-        self._text = ''
-        self._character = ''
-        self.reset()
 
+        position = Point(20, 0)
+        self.set_position(position)
+
+        self._text = ''
+        self._buffer_letter_list = []  
+        
+        
+        
     def reset(self):
         '''
         This function will reset the buffer text to [] 
@@ -32,7 +36,12 @@ class Buffer(Actor):
         self._buffer_letter_list.append(character)
 
     def to_string(self):
-        self._text = str(self._buffer_letter_list)
         '''
         passes the chacter list to a string and saves it to _TEXT attribute
         '''
+        string = ''
+        for letter in self._buffer_letter_list:
+            string += letter
+
+        self.set_text(string)
+        
