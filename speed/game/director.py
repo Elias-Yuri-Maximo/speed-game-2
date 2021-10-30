@@ -1,4 +1,4 @@
-from _typeshed import Self
+
 from time import sleep
 from game import constants
 from game.buffer import Buffer
@@ -31,7 +31,7 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        self._attempt = ''
+        
         #This will be used to store the user attemptts
         self._buffer = Buffer()
         self._input_service = input_service
@@ -47,7 +47,7 @@ class Director:
         Args:
             self (Director): an instance of Director.
         """
-        
+        self.populate_word_list()
         while self._keep_playing:
             self._get_inputs()
             self._do_updates()
@@ -66,8 +66,8 @@ class Director:
         takes only self as an argument
         '''
 
-        for _ in range(5):
-            word = Word()
+        for i in range(5):
+            word = Word(constants.LIBRARY)
             self._word_library.insert_new_word(self, word)
 
 
@@ -85,7 +85,7 @@ class Director:
         self._output_service.draw_actors(object_word_list)
         ##gets the word list saved in word_library and passes it as 
         #an argument fot the output_service to print
-        self._attempt = self.output_service.get_attempt('Write one of the words you see: ')
+        self._buffer.add_character(self.input_service.get_letter())
         
 
     def _do_updates(self):
@@ -95,15 +95,14 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
+        attempt = self._buffer.get_text()
+        #gets the text from buffer and equals it to attempt
         
-        self._keep_playing = self._word_library.check_is_word_in_word_list_(self._attempt)
+        self._keep_playing = self._word_library.check_is_word_in_word_list_(attempt)
         #The word passed here will be a string.
         #This function will return a BOOLEAN VALUE that will be used by the score to add or to subtract.
 
-        #I am not sure of what these do, but, I assumed they are important, so I put them here 
-        self._output_service.clear_screen()     
-        self._output_service.flush_buffer()
-
+      
    
     def _do_outputs(self):
         """Outputs the important game information for each round of play. In 
@@ -119,5 +118,5 @@ class Director:
         self._output_service.draw_actor(self._score)
         self._output_service.flush_buffer()
 
-        if self._score > 5:
+        if self._score.get_score() > 5:
             self._keep_playing = False
