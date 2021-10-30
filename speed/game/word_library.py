@@ -1,6 +1,7 @@
 from game import constants
 from game.actor import Actor
 from game.point import Point
+from game.word import Word
 #from speed.game import word
 
 class WordLibrary:
@@ -36,9 +37,22 @@ class WordLibrary:
         SHOULD RETURN TRUE IF YES 
         SHOULD RETURN FALSE IF NO
         '''
-        for word in self._word_objects_list:
-            if word_from_user == word.get_text():
+        #for word in self.get_word_list():
+        #    if word_from_user == word.get_text():
+        #       return True
+        word_list = self.get_word_list()
+
+        for i in range(len(word_list)):
+            if word_from_user == word_list[i].get_text():
+                
+                self._word_objects_list.pop(i)
                 return True
-            else:
-                return False
+    
+    def move_words(self):
+        '''moves each word to the next spot'''
+        word_list = self.get_word_list()
+        
+        for i in range(len(word_list)):
+            word_list[i].move_next()
+            
             

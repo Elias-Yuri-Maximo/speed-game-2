@@ -101,9 +101,12 @@ class Director:
         
             if word_check== True:
                 self._score.add_points(1)
+                word = Word(constants.LIBRARY)
+                self._word_library.insert_new_word(word)
 
         else:
             self._buffer.add_character(letter)
+            
         
 
     def _do_updates(self):
@@ -113,7 +116,7 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        pass
+        self._word_library.move_words()
         
         #gets the text from buffer and equals it to attempt
         
@@ -140,5 +143,5 @@ class Director:
         self._output_service.draw_actor(self._score)
         self._output_service.flush_buffer()
 
-        if self._score.get_score() > 90:
+        if self._score.get_score() > 30:
             self._keep_playing = False
