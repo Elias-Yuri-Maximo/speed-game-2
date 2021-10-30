@@ -5,6 +5,8 @@ from game.buffer import Buffer
 from game.score import Score
 from game.word import Word
 from game.word_library import WordLibrary
+#from speed.game import Score
+#from speed.game import buffer
 #from speed.game import OutputService
 #from game.point import Point
 
@@ -39,6 +41,8 @@ class Director:
         self._output_service = output_service
         self._word_library = WordLibrary()
         self._score = Score()
+        self._guess = None
+
         
         
     def start_game(self):
@@ -88,10 +92,18 @@ class Director:
         #an argument fot the output_service to print
 
         letter = self._input_service.get_letter()
-        if letter == '*':
+
+        if letter == '*': #Enter
+            self._guess = self._buffer.get_text()
             self._buffer.reset()
 
-        self._buffer.add_character(letter)
+            word_check =  self._word_library.check_is_word_in_word_list(self._guess)
+        
+            if word_check== True:
+                self._score.add_points(1)
+
+        else:
+            self._buffer.add_character(letter)
         
 
     def _do_updates(self):
@@ -101,10 +113,14 @@ class Director:
         Args:
             self (Director): An instance of Director.
         """
-        attempt = self._buffer.get_text()
+        pass
+        
         #gets the text from buffer and equals it to attempt
         
-        self._keep_playing = self._word_library.check_is_word_in_word_list_(attempt)
+        #self._keep_playing = self._word_library.check_is_word_in_word_list(self._guess)
+        
+
+        
         #The word passed here will be a string.
         #This function will return a BOOLEAN VALUE that will be used by the score to add or to subtract.
 
@@ -124,5 +140,5 @@ class Director:
         self._output_service.draw_actor(self._score)
         self._output_service.flush_buffer()
 
-        if self._score.get_score() > 5:
+        if self._score.get_score() > 90:
             self._keep_playing = False

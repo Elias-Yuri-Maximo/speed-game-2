@@ -15,34 +15,34 @@ class Buffer(Actor):
         
         super().__init__() 
 
-        position = Point(20, 0)
+        position = Point(1, 20)
         self.set_position(position)
 
         self._text = ''
-        self._buffer_letter_list = []  
+        self._buffer_letter_list = ''  
         
         
         
     def reset(self):
         '''
-        This function will reset the buffer text to [] 
+        This function will reset the buffer text to ''
         '''
-        self._buffer_letter_list = []  
+        self._buffer_letter_list = ''
 
     def add_character(self, character):
         '''
         This function will add a character from what the player has typed.
         '''
-        self._buffer_letter_list.append(character)
-
-    def to_string(self):
-        '''
-        passes the chacter list to a string and saves it to _TEXT attribute
-        '''
-        string = ''
+        self._buffer_letter_list += character
         
-        for letter in self._buffer_letter_list:
-            string += letter
+        self.set_text(self._buffer_letter_list)
 
-        self.set_text(string)
+
+        
+
+   # def to_string(self):
+    #    '''
+     #   passes the chacter list to a string and saves it to _TEXT attribute
+      #  '''
+       # self.set_text(self._buffer_letter_list)
         

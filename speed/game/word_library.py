@@ -29,7 +29,7 @@ class WordLibrary:
 
 
 
-    def check_is_word_in_word_list_(self, word_from_user):
+    def check_is_word_in_word_list(self, word_from_user):
         '''
         checks if the word from the user (string) is in one of the
         texts of the object words in the list. 
@@ -38,7 +38,7 @@ class WordLibrary:
         '''
         for word in self._word_objects_list:
             if word_from_user == word.get_text():
-                return False
-            else:
                 return True
+            else:
+                return False
             
