@@ -29,7 +29,7 @@ class Word(Actor):
             1, (constants.MAX_X - 2)), y=random.randint(1, (constants.MAX_Y - 2)))
 
         self._velocity = Point(0, 1)
-        self._text = self.set_text(self._prepare_word())
+        self._text = self._prepare_word()
 
     def _prepare_word(self):
         """Gets the word from the word list and equals it to self.text
@@ -40,4 +40,5 @@ class Word(Actor):
         # THIS IS JUST A PLACEHOLDER, THIS SHOULD GET A WORD FROM _WORD_LIST
 
         word = random.choice(self._word_list)
+       
         return word

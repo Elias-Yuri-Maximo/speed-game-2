@@ -5,7 +5,7 @@ from game.buffer import Buffer
 from game.score import Score
 from game.word import Word
 from game.word_library import WordLibrary
-from speed.game import output_service, word
+#from speed.game import OutputService
 #from game.point import Point
 
 
@@ -68,7 +68,7 @@ class Director:
 
         for i in range(5):
             word = Word(constants.LIBRARY)
-            self._word_library.insert_new_word(self, word)
+            self._word_library.insert_new_word(word)
 
 
 
@@ -81,11 +81,17 @@ class Director:
             self (Director): An instance of Director.
         """
         
-        object_word_list = self._word_library.get_word_list()
-        self._output_service.draw_actors(object_word_list)
+        #object_word_list = self._word_library.get_word_list()
+        #self._output_service.draw_actors(object_word_list)
+
         ##gets the word list saved in word_library and passes it as 
         #an argument fot the output_service to print
-        self._buffer.add_character(self.input_service.get_letter())
+
+        letter = self._input_service.get_letter()
+        if letter == '*':
+            self._buffer.reset()
+
+        self._buffer.add_character(letter)
         
 
     def _do_updates(self):
